@@ -1,4 +1,4 @@
-.vscode
-.qodo
-mingw32
+.vscode/
+.qodo/
+mingw32/
 Program.exe
