@@ -2,6 +2,7 @@
 #include "config.h"
 #include "utils.h"
 #include "mosquito.h"
+#include "tree.h"
 #include <GLFW/glfw3.h>
 #include <cmath>
 
@@ -47,23 +48,6 @@ void drawHouse(float x, float y, float w, float h) {
     glVertex2f(x + w / 2.0f, y + h + h / 2.0f);
     glVertex2f(x + w, y + h);
     glEnd();
-}
-void drawTree(float x, float y) {
-    glColor3f(0.54f, 0.27f, 0.07f);
-    glBegin(GL_QUADS);
-    glVertex2f(x, y);
-    glVertex2f(x + 0.05f, y);
-    glVertex2f(x + 0.05f, y + 0.3f);
-    glVertex2f(x, y + 0.3f);
-    glEnd();
-    glColor3f(0.0f, 0.5f, 0.0f);
-    glBegin(GL_TRIANGLES);
-    glVertex2f(x - 0.1f, y + 0.3f);
-    glVertex2f(x + 0.15f, y + 0.5f);
-    glVertex2f(x + 0.3f, y + 0.3f);
-    glEnd();
-    drawCircle(x + 0.05f, y + 0.4f, 0.1f, 0.1f, 16);
-    drawCircle(x + 0.15f, y + 0.35f, 0.08f, 0.08f, 16);
 }
 void drawGrass(float x, float y) {
     glColor3f(0.1f, 0.6f, 0.1f);
@@ -155,41 +139,7 @@ void drawHistogram() {
     glDisable(GL_BLEND);
 }
 void display() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_QUADS);
-    glColor3f(0.53f, 0.81f, 0.92f);
-    glVertex2f(-1,1);
-    glVertex2f(1,1);
-    glColor3f(0.8f, 0.9f, 0.95f);
-    glVertex2f(1,-1);
-    glVertex2f(-1,-1);
-    glEnd();
-    glColor3f(1.0f, 0.9f, 0.0f);
-    drawCircle(0.8f, 0.8f, 0.1f, 0.1f, 32);
-    glColor3f(1,1,1);
-    drawCircle(-0.8f, 0.75f, 0.08f, 0.04f, 24);
-    drawCircle(-0.55f, 0.8f, 0.07f, 0.035f, 24);
-    drawCircle(0.3f, 0.7f, 0.09f, 0.045f, 24);
-    for (int i = 0; i < 20; ++i) drawGrass(randFloat(-1.0f, 1.0f), -0.95f);
-    drawHouse(-0.9f, -0.8f, 0.3f, 0.3f);
-    drawHouse(-0.5f, -0.8f, 0.4f, 0.4f);
-    drawHouse(0.6f, -0.85f, 0.25f, 0.25f);
-    drawTree(-0.2f, -0.6f);
-    drawTree(0.7f, -0.7f);
-    drawTree(0.2f, -0.75f);
-    drawPond();
-    drawWaterBowl();
-    for (size_t i = 0; i < larvae.size(); ++i) drawLarva(larvae[i].x, larvae[i].y);
-    for (int i = 0; i < NUM_MOSQUITOES; ++i) {
-        if (mosquitoes[i].alive) drawMosquito(mosquitoes[i].x, mosquitoes[i].y, mosquitoes[i].size);
-    }
-    if (spraying) {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(0.08f, 0.5f, 1.0f, 0.45f);
-        drawCircle(sprayX, sprayY, sprayRadius, sprayRadius, 36);
-        glDisable(GL_BLEND);
-    }
-    drawRain();
-    drawHistogram();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    drawTree(0.0f, -0.5f, 0.0f);
+    // The rest of the display function will be updated later
 }
