@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include($ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake OPTIONAL)
 
 find_package(glfw3 CONFIG REQUIRED)
-find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(Threads REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GLU REQUIRED)
 
 add_executable(dengue_sim MyProject.cpp)
 
@@ -19,8 +21,10 @@ target_include_directories(dengue_sim PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 # Link against the vcpkg-provided CMake targets
 target_link_libraries(dengue_sim PRIVATE
     glfw
-    glad::glad
     glm::glm
+    Threads::Threads
+    OpenGL::GL
+    OpenGL::GLU
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 5)
