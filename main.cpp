@@ -1,141 +1,42 @@
 #include <GLFW/glfw3.h>
-#include <cstdio>
-#include <cmath>
-#include <vector>
-#include "config.h"
-#include "utils.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "drawing.h"
-#include "mosquito.h"
-#include "ui.h"
+#include "config.h"
 
-// ---------------- Global variable definitions ----------------
-float waterBowlX = -0.4f, waterBowlY = -0.9f, waterBowlRadius = 0.05f;
-bool waterBowlVisible = false;
-bool draggingBowl = false;
-bool spraying = false;
-float sprayX = 0.0f, sprayY = 0.0f, sprayRadius = 0.02f;
-int sprayCharges = 5;
-int sprayRefillTimer = 0;
-int spawnCounter = 0;
-int spawnIntervalNormal = 180;
-int spawnIntervalHigh = 50;
-int currentSpawnInterval = spawnIntervalNormal;
-bool rainActive = false;
-int rainTimer = 0;
-int totalAlive = 0;
-int totalKilled = 0;
-std::vector<Larva> larvae;
-char popupText[256] = "";
-int popupTimer = 0;
-std::vector<int> killsPerMinute;
-int frameCounter = 0;
-
-// ---------------- Input & Timer ----------------
-
+// A simple key callback to exit on pressing ESC
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-        if (sprayCharges > 0) {
-            double x, y;
-            glfwGetCursorPos(window, &x, &y);
-            int width, height;
-            glfwGetWindowSize(window, &width, &height);
-            sprayX = (float)(x / width * 2.0 - 1.0);
-            sprayY = (float)(1.0 - y / height * 2.0);
-            sprayRadius = 0.02f;
-            spraying = true;
-            sprayCharges--;
-            snprintf(popupText, sizeof(popupText), "Random spray! Charges left: %d", sprayCharges);
-            popupTimer = popupDuration;
-        } else {
-            snprintf(popupText, sizeof(popupText), "No spray charges! Wait for refill.");
-            popupTimer = popupDuration;
-#ifdef _WIN32
-            Beep(400, 200);
-#endif
-        }
-    } else if (key == GLFW_KEY_R && action == GLFW_PRESS) {
-        waterBowlVisible = !waterBowlVisible;
-        snprintf(popupText, sizeof(popupText), waterBowlVisible ? "Water bowl added: Increases breeding!" : "Water bowl removed: Reduces spawning.");
-        popupTimer = popupDuration;
-#ifdef _WIN32
-        Beep(1000, 200);
-#endif
-    } else if (key == GLFW_KEY_T && action == GLFW_PRESS) {
-        if (!rainActive) {
-            rainActive = true;
-            rainTimer = rainDuration;
-            for (int i = 0; i < rainSpawnCount; ++i) spawnOneMosquito(true);
-            snprintf(popupText, sizeof(popupText), "Manual rain event triggered!");
-            popupTimer = popupDuration;
-#ifdef _WIN32
-            Beep(500, 300);
-#endif
-        }
-    } else if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
     }
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
-        if (sprayCharges > 0) {
-            double x, y;
-            glfwGetCursorPos(window, &x, &y);
-            int width, height;
-            glfwGetWindowSize(window, &width, &height);
-            sprayX = (float)(x / width * 2.0 - 1.0);
-            sprayY = (float)(1.0 - y / height * 2.0);
-            sprayRadius = 0.02f;
-            spraying = true;
-            sprayCharges--;
-            snprintf(popupText, sizeof(popupText), "Spray at mouse! Charges left: %d", sprayCharges);
-            popupTimer = popupDuration;
-        } else {
-            snprintf(popupText, sizeof(popupText), "No spray charges! Wait for refill.");
-            popupTimer = popupDuration;
-#ifdef _WIN32
-            Beep(400, 200);
-#endif
-        }
-    }
-    else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
-        if (waterBowlVisible) {
-            double x, y;
-            glfwGetCursorPos(window, &x, &y);
-            int width, height;
-            glfwGetWindowSize(window, &width, &height);
-            float nx = (float)(x / width * 2.0 - 1.0);
-            float ny = (float)(1.0 - y / height * 2.0);
-            float dx = nx - waterBowlX;
-            float dy = ny - waterBowlY;
-            if (sqrtf(dx*dx + dy*dy) < waterBowlRadius * 1.5f) {
-                draggingBowl = true;
-            }
-        }
-    } else if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE) {
-        draggingBowl = false;
-    }
-}
-
-void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
-{
-    if (draggingBowl) {
-        int width, height;
-        glfwGetWindowSize(window, &width, &height);
-        waterBowlX = (float)(xpos / width * 2.0 - 1.0);
-        waterBowlY = (float)(1.0 - ypos / height * 2.0);
-    }
-}
-
-// ---------------- Setup ----------------
 void initGL() {
-    glClearColor(1,1,1,1);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-1,1,-1,1,-1,1);
-    initializeMosquitoes();
+    // Set a sky-blue background
+    glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
+
+    // Enable 3D-specific features
+    glEnable(GL_DEPTH_TEST); // Ensures objects in front obscure objects behind
+    glEnable(GL_LIGHTING);   // Enables lighting calculations
+    glEnable(GL_LIGHT0);     // Enables the first light source
+    glEnable(GL_COLOR_MATERIAL); // Allows glColor to set material properties
+    glEnable(GL_NORMALIZE);  // Keeps surface normals unit length
+
+    // Define properties for the light source
+    GLfloat light_ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+    GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat light_position[] = { 1.0f, 1.0f, 1.0f, 0.0f }; // Directional light from above-right
+
+    // Apply the light properties
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+    // Tell OpenGL how to handle material colors
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 }
 
 int main(void) {
@@ -144,7 +45,7 @@ int main(void) {
     if (!glfwInit())
         return -1;
 
-    window = glfwCreateWindow(WINDOW_W, WINDOW_H, "Dengue Awareness Simulation", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_W, WINDOW_H, "3D Tree Model", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -154,51 +55,25 @@ int main(void) {
     glfwMakeContextCurrent(window);
     initGL();
 
+    // Set the input callback
     glfwSetKeyCallback(window, key_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-    glfwSetCursorPosCallback(window, cursor_position_callback);
-
-    double lastTime = glfwGetTime();
 
     while (!glfwWindowShouldClose(window))
     {
-        double currentTime = glfwGetTime();
-        if (currentTime - lastTime >= 0.05) { // 50ms interval
-            updateMosquitoesLogic();
-            if (spraying) {
-                checkSprayCollisions();
-                sprayRadius += sprayGrowth;
-                if (sprayRadius > maxSprayRadius) {
-                    spraying = false;
-                    sprayRadius = 0.02f;
-                }
-#ifdef _WIN32
-                Beep(600, 50);
-#endif
-            }
-            sprayRefillTimer++;
-            if (sprayRefillTimer >= sprayRefillInterval && sprayCharges < maxSprayCharges) {
-                sprayCharges++;
-                sprayRefillTimer = 0;
-                snprintf(popupText, sizeof(popupText), "Spray charge refilled! %d/%d", sprayCharges, maxSprayCharges);
-                popupTimer = popupDuration;
-#ifdef _WIN32
-                Beep(1200, 200);
-#endif
-            }
-            for (int i = 0; i < NUM_MOSQUITOES; ++i) {
-                if (!mosquitoes[i].alive && mosquitoes[i].deadTimer <= 0) {
-                    if (totalAlive < 5) spawnOneMosquito(false);
-                } else if (!mosquitoes[i].alive) {
-                    int dec = (waterBowlVisible || isNearPondArea(mosquitoes[i].x, mosquitoes[i].y)) ? 2 : 1;
-                    mosquitoes[i].deadTimer -= dec;
-                    if (mosquitoes[i].deadTimer <= 0) spawnOneMosquito(false);
-                }
-            }
-            if (popupTimer > 0) popupTimer--;
-            lastTime = currentTime;
-        }
+        // Set up the projection matrix (the lens of the camera)
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_W / (float)WINDOW_H, 0.1f, 100.0f);
+        glLoadMatrixf(&projection[0][0]);
 
+        // Set up the modelview matrix (the position and orientation of the camera)
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        // Position the camera at (2, 2, 5) looking at the origin (0, 0, 0)
+        glm::mat4 view = glm::lookAt(glm::vec3(2.0f, 2.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glLoadMatrixf(&view[0][0]);
+
+        // Render the scene
         display();
 
         glfwSwapBuffers(window);
