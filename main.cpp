@@ -9,41 +9,26 @@
 #include "ui.h"
 
 // ---------------- Global variable definitions ----------------
-const int NUM_MOSQUITOES = 30;
-const int WINDOW_W = 900;
-const int WINDOW_H = 650;
-const float pondX = -0.7f;
-const float pondY = -0.85f;
-const float pondRadiusX = 0.25f;
-const float pondRadiusY = 0.12f;
 float waterBowlX = -0.4f, waterBowlY = -0.9f, waterBowlRadius = 0.05f;
 bool waterBowlVisible = false;
 bool draggingBowl = false;
 bool spraying = false;
 float sprayX = 0.0f, sprayY = 0.0f, sprayRadius = 0.02f;
-const float maxSprayRadius = 0.15f;
-const float sprayGrowth = 0.018f;
 int sprayCharges = 5;
-const int maxSprayCharges = 5;
 int sprayRefillTimer = 0;
-const int sprayRefillInterval = 600;
 int spawnCounter = 0;
 int spawnIntervalNormal = 180;
 int spawnIntervalHigh = 50;
 int currentSpawnInterval = spawnIntervalNormal;
 bool rainActive = false;
 int rainTimer = 0;
-const int rainDuration = 200;
-const int rainSpawnCount = 5;
 int totalAlive = 0;
 int totalKilled = 0;
 std::vector<Larva> larvae;
 char popupText[256] = "";
 int popupTimer = 0;
-const int popupDuration = 80;
 std::vector<int> killsPerMinute;
 int frameCounter = 0;
-const int framesPerMinute = 1200;
 
 // ---------------- Input & Timer ----------------
 
