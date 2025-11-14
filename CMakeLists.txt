@@ -12,7 +12,7 @@ find_package(glm CONFIG REQUIRED)
 find_package(Threads REQUIRED)
 find_package(OpenGL REQUIRED)
 
-add_executable(dengue_sim MyProject.cpp)
+add_executable(dengue_sim main.cpp drawing.cpp mosquito.cpp ui.cpp)
 
 # Include the directory containing header files
 target_include_directories(dengue_sim PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
