@@ -1,6 +1,7 @@
 #include "drawing.h"
 #include "config.h"
 #include "utils.h"
+#include "mosquito.h"
 #include <GLFW/glfw3.h>
 #include <cmath>
 

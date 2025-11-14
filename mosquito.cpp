@@ -3,6 +3,7 @@
 #include "utils.h"
 #include <cmath>
 #include <ctime>
+#include <cstdio>
 
 Mosquito mosquitoes[NUM_MOSQUITOES];
 

@@ -1,4 +1,6 @@
 #include <GLFW/glfw3.h>
+#include <cstdio>
+#include <cmath>
 #include "config.h"
 #include "utils.h"
 #include "drawing.h"
@@ -109,7 +111,7 @@ void initGL() {
     glClearColor(1,1,1,1);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1,1,-1,1);
+    glOrtho(-1,1,-1,1,-1,1);
     initializeMosquitoes();
 }
 

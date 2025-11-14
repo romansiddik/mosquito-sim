@@ -19,5 +19,6 @@ void updateMosquitoesLogic();
 void spawnOneMosquito(bool pondBoost);
 void checkSprayCollisions();
 void updateHistogram(int killedThisFrame);
+bool isNearPondArea(float x, float y);
 
 #endif // MOSQUITO_H
