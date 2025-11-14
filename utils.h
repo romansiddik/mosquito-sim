@@ -4,8 +4,6 @@
 #include <cstdlib>
 
 // Utility random
-float randFloat(float a, float b) {
-    return a + static_cast<float>(rand()) / RAND_MAX * (b - a);
-}
+float randFloat(float a, float b);
 
 #endif // UTILS_H

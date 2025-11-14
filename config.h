@@ -4,54 +4,54 @@
 #include <vector>
 
 // ---------------- Configuration ----------------
-const int NUM_MOSQUITOES = 30;
-const int WINDOW_W = 900;
-const int WINDOW_H = 650;
+extern const int NUM_MOSQUITOES;
+extern const int WINDOW_W;
+extern const int WINDOW_H;
 // Pond position (bottom-left)
-const float pondX = -0.7f;
-const float pondY = -0.85f;
-const float pondRadiusX = 0.25f;
-const float pondRadiusY = 0.12f;
+extern const float pondX;
+extern const float pondY;
+extern const float pondRadiusX;
+extern const float pondRadiusY;
 // Water bowl position
-float waterBowlX = -0.4f, waterBowlY = -0.9f, waterBowlRadius = 0.05f;
-bool waterBowlVisible = false;
-bool draggingBowl = false;
+extern float waterBowlX, waterBowlY, waterBowlRadius;
+extern bool waterBowlVisible;
+extern bool draggingBowl;
 // Spray variables
-bool spraying = false;
-float sprayX = 0.0f, sprayY = 0.0f, sprayRadius = 0.02f;
-const float maxSprayRadius = 0.15f;
-const float sprayGrowth = 0.018f;
-int sprayCharges = 5; // Limited spray resource
-const int maxSprayCharges = 5;
-int sprayRefillTimer = 0;
-const int sprayRefillInterval = 600; // 30s at 50ms per frame
+extern bool spraying;
+extern float sprayX, sprayY, sprayRadius;
+extern const float maxSprayRadius;
+extern const float sprayGrowth;
+extern int sprayCharges; // Limited spray resource
+extern const int maxSprayCharges;
+extern int sprayRefillTimer;
+extern const int sprayRefillInterval; // 30s at 50ms per frame
 
 // Spawn control (frames)
-int spawnCounter = 0;
-int spawnIntervalNormal = 180;
-int spawnIntervalHigh = 50;
-int currentSpawnInterval = spawnIntervalNormal;
+extern int spawnCounter;
+extern int spawnIntervalNormal;
+extern int spawnIntervalHigh;
+extern int currentSpawnInterval;
 // Rain event
-bool rainActive = false;
-int rainTimer = 0;
-const int rainDuration = 200; // 10s at 50ms
-const int rainSpawnCount = 5; // Mosquitoes spawned during rain
+extern bool rainActive;
+extern int rainTimer;
+extern const int rainDuration; // 10s at 50ms
+extern const int rainSpawnCount; // Mosquitoes spawned during rain
 // Score
-int totalAlive = 0;
-int totalKilled = 0;
+extern int totalAlive;
+extern int totalKilled;
 // Larva tracking
 struct Larva {
     float x, y;
     int timer; // Frames spent near pond
 };
-std::vector<Larva> larvae;
+extern std::vector<Larva> larvae;
 // Educational popup
-char popupText[256] = "";
-int popupTimer = 0;
-const int popupDuration = 80;
+extern char popupText[256];
+extern int popupTimer;
+extern const int popupDuration;
 // Histogram data (kills per minute, assuming 1200 frames = 1 minute at 50ms)
-std::vector<int> killsPerMinute;
-int frameCounter = 0;
-const int framesPerMinute = 1200;
+extern std::vector<int> killsPerMinute;
+extern int frameCounter;
+extern const int framesPerMinute;
 
 #endif // CONFIG_H
