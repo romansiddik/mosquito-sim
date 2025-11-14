@@ -11,7 +11,6 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(Threads REQUIRED)
 find_package(OpenGL REQUIRED)
-find_package(GLU REQUIRED)
 
 add_executable(dengue_sim MyProject.cpp)
 
@@ -24,7 +23,6 @@ target_link_libraries(dengue_sim PRIVATE
     glm::glm
     Threads::Threads
     OpenGL::GL
-    OpenGL::GLU
 )
 
 if(CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 5)
