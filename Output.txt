@@ -1,0 +1,154 @@
+main: GLUT initialized
+main: Window created
+initGL: Setting up OpenGL
+initializeMosquitoes: 6 mosquitoes alive
+initGL: Complete
+main: Starting main loop
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=6, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered
+display: Rendering frame, alive=7, night=0, snow=0
+display: Frame rendered

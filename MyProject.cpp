@@ -34,7 +34,7 @@ const int maxSprayCharges = 5;
 int sprayRefillTimer = 0;
 const int sprayRefillInterval = 600; // 30s at 50ms per frame
 
-//hello
+//hello 
 // Spawn control (frames)
 int spawnCounter = 0;
 int spawnIntervalNormal = 180;
